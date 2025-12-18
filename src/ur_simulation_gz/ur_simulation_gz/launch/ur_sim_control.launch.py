@@ -47,6 +47,8 @@ from launch.substitutions import (
 )
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
+from launch_ros.substitutions import FindPackage
+
 
 
 def launch_setup(context, *args, **kwargs):
@@ -155,6 +157,9 @@ def launch_setup(context, *args, **kwargs):
             "true",
         ],
     )
+
+        # GZ nodes
+
 
     gz_launch_description = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -283,7 +288,7 @@ def generate_launch_description():
         )
     )
     declared_arguments.append(
-        DeclareLaunchArgument("launch_rviz", default_value="true", description="Launch RViz?")
+        DeclareLaunchArgument("launch_rviz", default_value="false", description="Launch RViz?")
     )
     declared_arguments.append(
         DeclareLaunchArgument(
@@ -302,7 +307,9 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "world_file",
-            default_value="empty.sdf",
+            default_value=PathJoinSubstitution(
+                [FindPackageShare("ur_simulation_gz"), "launch", "empty.sdf"]
+            ),
             description="Gazebo world file (absolute path or filename from the gazebosim worlds collection) containing a custom world.",
         )
     )
