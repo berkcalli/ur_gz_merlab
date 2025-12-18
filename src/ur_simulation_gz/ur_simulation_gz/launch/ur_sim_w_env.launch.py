@@ -22,7 +22,7 @@ def launch_setup(context, *args, **kwargs):
             "/home/bcalli/datasets/ycb-models/002_master_chef_can/master_chef_can.sdf",
             "-name",
             "target_object",
-            "-x", "0.5",
+            "-x", "0.6",
             "-y", "0.0",
             "-z", "1.0",
             "-allow_renaming",
@@ -39,7 +39,7 @@ def launch_setup(context, *args, **kwargs):
             "/home/bcalli/datasets/gazebo_objects/FoodCourtTable1/model.sdf",
             "-name",
             "table",
-            "-x", "0.5",
+            "-x", "0.6",
             "-y", "0.0",
             "-z", "0.0",
             "-allow_renaming",
@@ -54,7 +54,7 @@ def launch_setup(context, *args, **kwargs):
             "-world",
             "empty",
             "-file",
-            "/home/bcalli/ros-jazzy-ws/ur_gz_merlab/src/ur_simulation_gz/ur_simulation_gz/urdf/camera_rgbd.urdf",
+            [FindPackageShare("ur_simulation_gz"), "/urdf/camera_rgbd.urdf"],
             "-name",
             "camera_sensor",
             "-x", "0.5",
@@ -67,7 +67,7 @@ def launch_setup(context, *args, **kwargs):
         package="ros_gz_bridge",
         executable="parameter_bridge",
         arguments=[
-            "/camera_merlab/image@sensor_msgs/msg/Image[gz.msgs.Image",
+            "/camera/image@sensor_msgs/msg/Image[gz.msgs.Image",
         ],
         output="screen",
     )
@@ -76,7 +76,7 @@ def launch_setup(context, *args, **kwargs):
         package="ros_gz_bridge",
         executable="parameter_bridge",
         arguments=[
-            "/camera_merlab/depth_image@sensor_msgs/msg/Image[gz.msgs.Image",
+            "/camera/depth_image@sensor_msgs/msg/Image[gz.msgs.Image",
         ],
         output="screen",
     )
